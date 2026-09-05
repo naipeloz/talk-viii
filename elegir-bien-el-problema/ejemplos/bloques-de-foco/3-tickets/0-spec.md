@@ -1,0 +1,90 @@
+# Spec — Bloques de foco
+
+> Salida de la skill `poc-a-spec`. Entrada: [2-okr.md](../2-okr.md).
+
+## Criterio de éxito
+
+> Reproduce exactamente los 20 días verificados a mano, y devuelve bloques por persona
+> por semana con el desglose de qué los rompió, en una visualización interpretable en
+> tres segundos.
+
+## Las reglas
+
+Ninguna la adivina un agente solo. Por eso están escritas acá y no en el código.
+
+| Regla | Decisión |
+|---|---|
+| Evento declinado | No cuenta |
+| Evento *tentative* | **Sí corta** — no puedes planificar encima |
+| All-day (vacaciones, feriado) | Saca el día entero, no lo corta |
+| "Focus time" propio | **No cuenta como interrupción** — es el resultado que se busca |
+| Organizador vs. invitado | Igual, ambos cortan |
+| Horario laboral | 9:00–18:00, declarado explícitamente |
+| Almuerzo | ⚠️ **Pendiente:** ¿parte mañana de tarde, o es tiempo libre? |
+
+**Colchón de recuperación:** un bloque exige **15 minutos de margen** después de la
+reunión anterior. Decisión tomada: va con colchón. Es el tipo de regla que solo aparece
+si alguien la escribe en el spec.
+
+## Contratos
+
+Se fijan primero — es lo que permite el paralelo.
+
+```ts
+type Evento = {
+  inicio: string          // ISO
+  fin: string
+  esDiaCompleto: boolean
+  estadoRespuesta: "aceptado" | "tentativo" | "declinado" | "sin_responder"
+  esOrganizador: boolean
+  esFocusTime: boolean
+}
+
+type Dia = {
+  fecha: string
+  persona: string         // anonimizada
+  bloquesLibres: { inicio: string; fin: string; minutos: number }[]
+  eventosQueCortaron: number
+}
+```
+
+El schema **no guarda títulos de eventos**, a propósito. Anonimización en la ingesta.
+
+## Restricciones de alcance
+
+- Sin base de datos, sin ORM, sin migraciones
+- Sin dashboard, sin frontend, sin servidor HTTP
+- Sin gráfico interactivo — la visualización es ASCII en consola
+- Sin integración con Slack, sin notificaciones
+- Sin sugerencias de reagendado
+- Sin Docker
+- **Sin IA en el producto**
+- Sin `utils/` ni `helpers/`
+
+Entra un `.ics`, sale una tabla en consola.
+
+## Los tickets
+
+| # | Ticket | Dueño | Bloquea |
+|---|---|---|---|
+| 1 | [Ingesta del `.ics`](1-ingesta.md) | Julián | nada |
+| 2 | [Schema + reglas](2-reglas.md) | Julián | nada (el contrato ya está fijado arriba) |
+| 3 | [Cálculo de bloques](3-bloques.md) | Julián | nada |
+| 4 | [Reporte + eval](4-reporte-y-eval.md) | Julián | nada |
+
+**Los cuatro arrancan a la vez** porque el schema quedó fijado antes de partir el
+trabajo. Si el contrato se hubiera definido dentro del ticket 2, los otros tres lo
+estarían esperando.
+
+## La salida
+
+```
+Lun  ████░░░░████████  2 bloques
+Mar  ██░░██░░██░░████  1 bloque
+Mié  ████████████████  3 bloques
+```
+
+Un martes visualmente destrozado con las **mismas horas totales** que el miércoles
+demuestra sin decir una palabra que la métrica obvia no responde nada.
+
+Esta visualización va en el criterio de éxito, no como un extra.
