@@ -10,7 +10,7 @@
 
 ## Las reglas
 
-Ninguna la adivina un agente solo. Por eso están escritas acá y no en el código.
+Ninguna la adivina un agente solo. Por eso están escritas aquí y no en el código.
 
 | Regla | Decisión |
 |---|---|

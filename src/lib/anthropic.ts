@@ -16,7 +16,7 @@ let client: Anthropic | null = null;
 export function getAnthropicClient() {
   if (!process.env.ANTHROPIC_API_KEY) {
     throw new AnthropicConfigError(
-      "Falta ANTHROPIC_API_KEY: cargala en .env.local (ver .env.example).",
+      "Falta ANTHROPIC_API_KEY: cárgala en .env.local (ver .env.example).",
     );
   }
   client ??= new Anthropic();
@@ -34,13 +34,13 @@ export function describeAnthropicError(error: unknown): string {
     return "La ANTHROPIC_API_KEY no es válida.";
   }
   if (error instanceof Anthropic.RateLimitError) {
-    return "Anthropic devolvió rate limit; probá de nuevo en unos segundos.";
+    return "Anthropic devolvió rate limit; prueba de nuevo en unos segundos.";
   }
   if (error instanceof Anthropic.BadRequestError) {
     // El saldo agotado llega como 400, no como error de credencial: sin este
     // caso aparte se lee como un bug del pedido cuando es de facturación.
     if (error.message.includes("credit balance")) {
-      return "La cuenta de Anthropic no tiene crédito. Cargá saldo en Plans & Billing.";
+      return "La cuenta de Anthropic no tiene crédito. Carga saldo en Plans & Billing.";
     }
     return `Pedido inválido: ${error.message}`;
   }

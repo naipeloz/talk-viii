@@ -18,7 +18,7 @@ KR3  Julián decide con el número en la mano:
 
 ## El caso especial: el KR2 valida el instrumento, no una predicción
 
-Acá no hay un modelo que acierte o falle. Lo difícil no es contar bloques: es que las
+Aquí no hay un modelo que acierte o falle. Lo difícil no es contar bloques: es que las
 reglas sean las correctas — que un evento declinado no cuente, que un all-day no borre
 el día, que el "Focus time" propio no cuente como interrupción.
 

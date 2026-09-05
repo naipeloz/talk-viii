@@ -72,7 +72,7 @@ async function getAuth(): Promise<Auth> {
   if (apiKey) return { headers: {}, params: { key: apiKey } };
 
   throw new CalendarConfigError(
-    "Faltan credenciales de Google: definí GOOGLE_SERVICE_ACCOUNT_EMAIL + " +
+    "Faltan credenciales de Google: define GOOGLE_SERVICE_ACCOUNT_EMAIL + " +
       "GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY (calendario privado) o GOOGLE_CALENDAR_API_KEY " +
       "(calendario público).",
   );

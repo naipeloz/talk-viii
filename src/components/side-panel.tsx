@@ -92,7 +92,7 @@ export function SidePanel({ collapsed, onToggle, selected, events, loading, erro
 
           {!loading && !error && events.length === 0 && (
             <p className="mt-5 rounded-lg border border-dashed border-black/15 p-6 text-center text-sm opacity-60 dark:border-white/15">
-              Elegí otro día en el calendario para ver su agenda.
+              Elige otro día en el calendario para ver su agenda.
             </p>
           )}
 

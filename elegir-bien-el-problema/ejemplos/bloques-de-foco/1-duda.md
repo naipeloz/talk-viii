@@ -40,7 +40,7 @@ distintas.**
 
 Lo que importa no es cuánto ocupan. Es qué dejan.
 
-## Fuera de alcance, anotado acá para no perderlo
+## Fuera de alcance, anotado aquí para no perderlo
 
 - Sugerir cómo reagendar
 - Comparar entre personas del equipo

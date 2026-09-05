@@ -7,18 +7,18 @@ description: Convierte un OKR de POC en un spec ejecutable — criterio de éxit
 
 Paso 3 de 3 (`elegir-problema` → `okr-de-poc` → **`poc-a-spec`**).
 
-Acá recién aparece la tecnología. Y aparece atada: cada pieza del spec sale de una
+Aquí recién aparece la tecnología. Y aparece atada: cada pieza del spec sale de una
 pieza del OKR, no de tu criterio.
 
 ## Entrada
 
 La salida de `okr-de-poc`: un OKR completo con los cuatro campos y los 20 casos. Si
-falta alguno —sobre todo el umbral o el nombre propio del KR3— volvé al paso 2. Un
+falta alguno —sobre todo el umbral o el nombre propio del KR3— vuelve al paso 2. Un
 spec sobre un OKR incompleto es un spec que no se puede evaluar.
 
 ## El puente
 
-Traducí mecánicamente. Este mapeo no se improvisa:
+Traduce mecánicamente. Este mapeo no se improvisa:
 
 | Del OKR | Al spec |
 |---|---|
@@ -30,8 +30,8 @@ Traducí mecánicamente. Este mapeo no se improvisa:
 
 ## Las reglas — la parte que nadie adivina
 
-Antes de partir el trabajo, sacá a la superficie **las decisiones que un agente
-tomaría solo y mal**. Preguntá por los casos borde uno por uno y escribí cada decisión
+Antes de partir el trabajo, saca a la superficie **las decisiones que un agente
+tomaría solo y mal**. Pregunta por los casos borde uno por uno y escribe cada decisión
 en una tabla. Los sospechosos según el dominio:
 
 - Estados intermedios: ¿lo tentativo cuenta como sí o como no?
@@ -50,16 +50,16 @@ se resuelven por defecto en el código.
 
 ## Los contratos, antes de partir
 
-Fijá los tipos y el schema **primero**. Es lo único que permite que los tickets corran
+Fija los tipos y el schema **primero**. Es lo único que permite que los tickets corran
 en paralelo: si el contrato se define dentro de un ticket, todos los demás lo esperan.
 
-Al fijarlo, preguntá qué datos **no** se guardan. La anonimización, el descarte de
+Al fijarlo, pregunta qué datos **no** se guardan. La anonimización, el descarte de
 campos sensibles y las columnas que nadie va a mirar son decisiones de alcance, y se
 escriben.
 
 ## Qué NO lleva — preguntalo explícitamente
 
-Preguntá: *¿qué queda afuera?* Si no contestan, proponé una lista y pedí confirmación.
+Pregunta: *¿qué queda afuera?* Si no contestan, propón una lista y pide confirmación.
 La lista por defecto para un POC:
 
 - Sin base de datos, sin ORM, sin migraciones
@@ -69,26 +69,26 @@ La lista por defecto para un POC:
 - Sin `utils/` ni `helpers/`
 - Sin IA en el producto, salvo que la duda sea sobre la IA
 
-Y escribí en una línea la forma del POC: *entra un X, sale un Y*.
+Y escribe en una línea la forma del POC: *entra un X, sale un Y*.
 
 ## Los tickets
 
-Partí en 3 a 5 paquetes. Cada uno con las cinco secciones (ver `formato-de-ticket`, la
+Parte en 3 a 5 paquetes. Cada uno con las cinco secciones (ver `formato-de-ticket`, la
 skill de repo — que es además la que los guarda en `tickets/` o los publica en el
-tablero, una vez que pasan). Marcá:
+tablero, una vez que pasan). Marca:
 
-- **Cuál bloquea.** Si hay uno que los demás esperan, decilo. Normalmente es el
+- **Cuál bloquea.** Si hay uno que los demás esperan, dilo. Normalmente es el
   contrato, y por eso se fija antes.
-- **Cuáles corren en paralelo de verdad.** Distinguí dos cosas que se confunden:
+- **Cuáles corren en paralelo de verdad.** Distingue dos cosas que se confunden:
   *bloquear el arranque* —nadie puede empezar hasta que esto cierre— y *consumir la
   salida* —se escribe contra el contrato y se integra después—. Con el contrato fijado,
-  consumir no bloquea; sin él, sí. Si de verdad no pueden arrancar juntos, **decilo** en
+  consumir no bloquea; sin él, sí. Si de verdad no pueden arrancar juntos, **dilo** en
   vez de fingir que sí: un tablero que promete paralelo y no lo es cuesta más que uno
   secuencial.
 - **El eval es un ticket.** Los 20 casos del KR1 no son "testing": son el ticket que
   decide si el resto sirve.
 
-## Qué devolvés
+## Qué devuelves
 
 Markdown listo para pegar en el tablero, **un archivo por ticket**, más un spec corto
 que los precede:
@@ -131,6 +131,6 @@ Entra un <X>, sale un <Y>.
 - Ningún ticket sale sin sección de restricciones de alcance.
 - Ningún criterio de aceptación queda escrito como opinión: pasa el mismo test de
   medible y falsificable que en `okr-de-poc`.
-- Si los paquetes no pueden correr en paralelo, lo decís.
+- Si los paquetes no pueden correr en paralelo, lo dices.
 - Si una regla quedó sin decidir, aparece marcada ⚠️ en las restricciones de alcance
   del ticket que la usa, no entre sus criterios de aceptación.

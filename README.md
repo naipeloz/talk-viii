@@ -7,7 +7,7 @@ calendario de Google, con un panel lateral colapsable para el detalle del día.
 
 ```bash
 npm install
-cp .env.example .env.local   # completá las credenciales (ver abajo)
+cp .env.example .env.local   # completa las credenciales (ver abajo)
 npm run dev
 ```
 
@@ -15,17 +15,17 @@ npm run dev
 
 La app lee los eventos con la **Google Calendar API v3** desde un route handler
 (`/api/events`), así las credenciales nunca llegan al browser. Hay dos rutas de
-autenticación; alcanza con configurar una.
+autenticación; basta con configurar una.
 
 ### A) Calendario privado — service account (recomendado)
 
-1. En [Google Cloud Console](https://console.cloud.google.com/) creá (o elegí) un proyecto
-   y habilitá la **Google Calendar API**.
-2. Creá una **service account** y generá una key JSON.
+1. En [Google Cloud Console](https://console.cloud.google.com/) crea (o elige) un proyecto
+   y habilita la **Google Calendar API**.
+2. Crea una **service account** y genera una key JSON.
 3. En Google Calendar → *Configuración del calendario* → **Compartir con determinadas
-   personas** → agregá el `client_email` de la service account con permiso
+   personas** → agrega el `client_email` de la service account con permiso
    **"Ver todos los detalles del evento"**.
-4. Configurá las variables:
+4. Configura las variables:
 
    ```
    GOOGLE_SERVICE_ACCOUNT_EMAIL=<client_email del JSON>
@@ -36,10 +36,10 @@ No requiere que el calendario sea público ni que el visitante se loguee.
 
 ### B) Calendario público — API key
 
-1. Hacé el calendario público (*Configuración del calendario* → **Permisos de acceso** →
+1. Haz el calendario público (*Configuración del calendario* → **Permisos de acceso** →
    "Hacer disponible al público").
-2. Creá una **API key** en Google Cloud, restringida a la Calendar API.
-3. Configurá `GOOGLE_CALENDAR_API_KEY=<tu key>`.
+2. Crea una **API key** en Google Cloud, restringida a la Calendar API.
+3. Configura `GOOGLE_CALENDAR_API_KEY=<tu key>`.
 
 Más simple, pero expone el calendario a cualquiera que tenga el ID.
 
@@ -72,22 +72,22 @@ servidor: la credencial nunca llega al browser.
 
 ### A · Con la suscripción de claude.ai
 
-El Agent SDK delega en el binario de Claude Code, así que usa el login que ya tenés en
+El Agent SDK delega en el binario de Claude Code, así que usa el login que ya tienes en
 la máquina en vez de créditos. Necesita ese binario presente — por eso no funciona en
 Vercel.
 
-Elegís **cuál** login con `CLAUDE_CONFIG_DIR` en `.env.local`. Si tenés varias cuentas
+Eliges **cuál** login con `CLAUDE_CONFIG_DIR` en `.env.local`. Si tienes varias cuentas
 (por ejemplo un `~/.claude` de trabajo y un `~/.claude-personal` con el plan personal),
-apuntá a la que quieras que pague:
+apunta a la que quieras que pague:
 
 ```
-CLAUDE_CONFIG_DIR=/Users/vos/.claude-personal
+CLAUDE_CONFIG_DIR=/Users/tu-usuario/.claude-personal
 ```
 
 `askForJson()` en `src/lib/claude-agent.ts` es la única puerta: recibe un prompt y un
 JSON Schema, y devuelve la respuesta ya parseada. Va sin herramientas y con un solo
 turno — es una pregunta, no un agente. Y **borra `ANTHROPIC_API_KEY` del entorno del
-subproceso**: si está seteada, Claude Code la prefiere y terminás pagando créditos sin
+subproceso**: si está seteada, Claude Code la prefiere y terminas pagando créditos sin
 enterarte.
 
 ### B · Con una API key
@@ -98,7 +98,7 @@ bundle—, más `ANTHROPIC_MODEL` y `describeAnthropicError`, que traduce los er
 SDK de más específico a más general.
 
 Para pedirle JSON al modelo, `client.messages.parse()` con `jsonSchemaOutputFormat`, el
-helper que ya trae el SDK: no hace falta sumar `zod`. Ojo que `parsed_output` es `null`
+helper que ya trae el SDK: no hace falta sumar `zod`. Ten en cuenta que `parsed_output` es `null`
 si el parseo falla.
 
 ### La box del panel
@@ -112,7 +112,7 @@ La respuesta tarda unos **5–6 segundos**: casi todo es el arranque del subproc
 Claude Code. El botón queda en *Preguntándole a Claude…* mientras tanto.
 
 Los dos comandos de chequeo hacen una llamada chica y confirman de punta a punta que la
-credencial sirve, que el modelo responde y que los structured outputs validan. Corrélos
+credencial sirve, que el modelo responde y que los structured outputs validan. Ejecútalos
 **antes** de necesitarlos, no en el medio de una demo.
 ## Cómo funciona
 

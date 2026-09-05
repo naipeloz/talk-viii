@@ -81,7 +81,7 @@ espera.
 
 - ⚠️ **Privacidad: pendiente de decidir.** Este ticket manda títulos y descripciones de
       reuniones reales a una API externa. El spec de bloques de foco decidió lo
-      contrario —*el schema no guarda títulos de eventos, a propósito*— y acá anonimizar
+      contrario —*el schema no guarda títulos de eventos, a propósito*— y aquí anonimizar
       no sirve: el texto **es** el insumo. No implementar hasta que Julián decida si el
       calendario que se demuestra puede salir del repo
 - ⚠️ **El insumo puede no existir.** Si el calendario está compartido como free/busy,

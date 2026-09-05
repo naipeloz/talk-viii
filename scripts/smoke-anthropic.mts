@@ -6,7 +6,7 @@
  *
  * Es una llamada chica y cuesta centavos. No importa `src/lib/anthropic.ts`
  * a propósito: ese módulo está detrás de `server-only` y sólo corre dentro de
- * Next. Acá se arma un cliente propio para probar la credencial en crudo.
+ * Next. Aquí se arma un cliente propio para probar la credencial en crudo.
  */
 import Anthropic from "@anthropic-ai/sdk";
 import { jsonSchemaOutputFormat } from "@anthropic-ai/sdk/helpers/json-schema";
@@ -26,7 +26,7 @@ const SCHEMA = {
 async function main() {
   if (!process.env.ANTHROPIC_API_KEY) {
     console.error("✗ Falta ANTHROPIC_API_KEY.");
-    console.error("  Copiá .env.example a .env.local y cargá la key.");
+    console.error("  Copia .env.example a .env.local y carga la key.");
     process.exit(1);
   }
 
@@ -39,7 +39,7 @@ async function main() {
     messages: [
       {
         role: "user",
-        content: "Devolvé ok=true y saludo con una frase corta en español rioplatense.",
+        content: "Devuelve ok=true y saludo con una frase corta en español neutro.",
       },
     ],
     output_config: { format: jsonSchemaOutputFormat(SCHEMA) },
@@ -76,9 +76,9 @@ main().catch((error: unknown) => {
     error.message.includes("credit balance")
   ) {
     console.error("✗ La key es válida, pero la cuenta no tiene crédito.");
-    console.error("  Cargá saldo en console.anthropic.com → Plans & Billing.");
+    console.error("  Carga saldo en console.anthropic.com → Plans & Billing.");
   } else if (error instanceof Anthropic.RateLimitError) {
-    console.error("✗ Rate limit. Esperá unos segundos y repetí.");
+    console.error("✗ Rate limit. Espera unos segundos y repite.");
   } else if (error instanceof Anthropic.APIConnectionError) {
     console.error("✗ No se pudo llegar a la API. ¿Hay red?");
   } else if (error instanceof Anthropic.APIError) {

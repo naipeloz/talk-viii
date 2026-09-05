@@ -24,8 +24,8 @@ export async function GET() {
   try {
     const respuesta = await askForJson<Prueba>({
       prompt:
-        "Confirmá en una sola frase, en español rioplatense y en menos de doce " +
-        "palabras, que estás respondiendo desde una app de calendario. Devolvé " +
+        "Confirma en una sola frase, en español neutro y en menos de doce " +
+        "palabras, que estás respondiendo desde una app de calendario. Devuelve " +
         "conectado=true.",
       schema: SCHEMA,
     });

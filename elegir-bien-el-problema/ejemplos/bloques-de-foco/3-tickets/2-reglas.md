@@ -2,7 +2,7 @@
 
 **Dueño:** Julián · **Bloquea a:** nada
 
-> **Este es el ticket que se lee en voz alta en la demo.** Las siete reglas viven acá.
+> **Este es el ticket que se lee en voz alta en la demo.** Las siete reglas viven aquí.
 
 ## Criterio de éxito
 
@@ -27,7 +27,7 @@ Entra: `Evento`. Sale: `"corta" | "borra_el_dia" | "se_ignora"`.
 - ⚠️ **Almuerzo: pendiente de decidir.** No implementar un default en silencio — si
   llega el momento sin decisión, el ticket se frena y se pregunta
 - Sin configuración: el horario laboral y el colchón son constantes declaradas
-- Sin heurísticas sobre el título — el título no llega hasta acá
+- Sin heurísticas sobre el título — el título no llega hasta aquí
 - Sin excepciones por persona
 
 ## Cómo se verifica

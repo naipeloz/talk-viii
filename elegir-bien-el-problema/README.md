@@ -35,7 +35,7 @@ framework — justo lo que critica el acto 1.
 
 ## Instalar
 
-Las tres primeras son **tuyas**: van a tu máquina y las tenés en cualquier repo.
+Las tres primeras son **tuyas**: van a tu máquina y las tienes en cualquier repo.
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -57,7 +57,7 @@ cp -R proyecto/formato-de-ticket /ruta/al/repo/.claude/skills/
 > tenemos demasiadas reuniones
 ```
 
-La skill arranca sola. También podés llamarla por nombre: `/elegir-problema`.
+La skill arranca sola. También puedes llamarla por nombre: `/elegir-problema`.
 
 Cada paso termina diciendo cuál es el siguiente. No saltees: `okr-de-poc` sin una duda
 escrita, o `poc-a-spec` sin umbral y sin nombre propio, producen documentos que se ven

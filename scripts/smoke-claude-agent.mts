@@ -32,7 +32,7 @@ const SCHEMA = {
 const started = Date.now();
 
 for await (const message of query({
-  prompt: "Devolvé ok=true y saludo con una frase corta en español rioplatense.",
+  prompt: "Devuelve ok=true y saludo con una frase corta en español neutro.",
   options: {
     model: "claude-opus-5",
     outputFormat: { type: "json_schema", schema: SCHEMA },

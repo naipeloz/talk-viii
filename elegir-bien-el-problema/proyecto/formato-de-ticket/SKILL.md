@@ -41,7 +41,7 @@ fija otro ticket, se referencia — no se redefine.>
 **Bloquea a:** son los tickets que **no pueden empezar** hasta que este cierre — no los
 que consumen su salida. Si el contrato ya está fijado, consumir no es bloquear: se
 escribe contra el tipo y se integra después. La dependencia de datos se declara en
-**Contrato**, no acá.
+**Contrato**, no aquí.
 
 **Reglas sin decidir (⚠️):** no son criterios de aceptación — un pendiente no se
 verifica, así que dos personas nunca coinciden en si se cumplió. Van en **Restricciones
@@ -50,7 +50,7 @@ llega el momento sin decisión, el ticket se frena y se pregunta.*
 
 ## Qué rechazar
 
-Cuando revises un ticket, rechazalo —y decí exactamente qué falta— si:
+Cuando revises un ticket, recházalo —y di exactamente qué falta— si:
 
 1. **No tiene criterio de éxito arriba del todo.** Un ticket que empieza por la
    implementación ya decidió la solución antes de fijar el resultado.
@@ -65,12 +65,12 @@ Cuando revises un ticket, rechazalo —y decí exactamente qué falta— si:
 
 ## Cómo rechazar
 
-Nombrá la sección que falla y por qué, y devolvé el ticket. **No lo completes vos.**
+Nombra la sección que falla y por qué, y devuelve el ticket. **No lo completes tú.**
 Rellenar un criterio de aceptación que el autor no escribió es inventar el contrato
 del trabajo de otra persona.
 
-Excepción única: si el autor te pide explícitamente una propuesta, escribila marcada
-como **propuesta** y pedí confirmación antes de darla por buena.
+Excepción única: si el autor te pide explícitamente una propuesta, escríbela marcada
+como **propuesta** y pide confirmación antes de darla por buena.
 
 ## Dónde va el ticket cuando pasa
 
@@ -79,15 +79,15 @@ no pasa, no.** Publicar un ticket incompleto es exactamente lo que esta skill ex
 para frenar: en el tablero ya no lo lee su autor, lo lee alguien que va a implementarlo.
 Primero el veredicto, después el destino.
 
-Preguntá cuál de los dos querés, o los dos. Si no te dicen, guardá el archivo y no
+Pregunta cuál de los dos quieres, o los dos. Si no te dicen, guarda el archivo y no
 publiques.
 
 ### A · Archivo en el repo
 
 `tickets/<NN>-<slug>.md` — `NN` es el siguiente número libre, el slug sale del título.
 
-- Creá `tickets/` si no existe.
-- **Nunca sobrescribas.** Si el archivo ya existe, decilo y pedí un número nuevo o
+- Crea `tickets/` si no existe.
+- **Nunca sobrescribas.** Si el archivo ya existe, dilo y pide un número nuevo o
   confirmación explícita para reemplazarlo.
 - El archivo es el ticket tal cual, sin envoltorio: arranca en el `#` del título.
 
@@ -99,27 +99,27 @@ gh issue create --title "$TITULO" --body "$(sed '1d' tickets/<NN>-<slug>.md)"
 ```
 
 El `#` del título va al campo título de la issue, no al cuerpo — por eso el `sed '1d'`.
-Guardá el archivo primero (opción A) aunque el destino sea el tablero: es lo que hace
+Guarda el archivo primero (opción A) aunque el destino sea el tablero: es lo que hace
 reproducible la publicación.
 
-- **Confirmá antes de crear.** Mostrá título, cuerpo y repo destino, y esperá el sí. Una
+- **Confirma antes de crear.** Muestra título, cuerpo y repo destino, y espera el sí. Una
   issue la ve el equipo entero y cerrarla no des-notifica a nadie.
 - **No dupliques.** `gh issue list --search "<título> in:title"` antes de crear.
-- **Dueño → `--assignee`** solo si sabés el handle de GitHub de esa persona. Si no lo
-  sabés, no lo adivines: queda en el cuerpo y lo decís al devolver.
+- **Dueño → `--assignee`** solo si sabes el handle de GitHub de esa persona. Si no lo
+  sabes, no lo adivines: queda en el cuerpo y lo dices al devolver.
 - **Labels:** solo las que ya existen (`gh label list`). No crees labels nuevas.
 - **Proyecto:** `--project "<nombre>"` solo si te nombran uno. No elijas tablero por tu
   cuenta.
-- **Bloquea a:** publicá en el orden del spec y reemplazá los nombres por `#N` cuando la
-  issue referida ya exista. Si todavía no existe, dejá el nombre — no inventes números.
-- Si `gh` no está instalado o no hay sesión, decilo, dejá el archivo guardado y frená
+- **Bloquea a:** publica en el orden del spec y reemplaza los nombres por `#N` cuando la
+  issue referida ya exista. Si todavía no existe, deja el nombre — no inventes números.
+- Si `gh` no está instalado o no hay sesión, dilo, deja el archivo guardado y frena
   ahí. No busques otra vía.
 
 Los `- [ ]` de los criterios de aceptación llegan a GitHub como checklist tildable. Es
 otra razón por la que esa sección tiene que ser verificable: en el tablero se tildan de
 a uno, y "funciona bien" no se tilda.
 
-Al terminar devolvé la ruta del archivo y la URL de la issue. Nada más.
+Al terminar devuelve la ruta del archivo y la URL de la issue. Nada más.
 
 ## Ejemplo bueno / ejemplo malo
 
