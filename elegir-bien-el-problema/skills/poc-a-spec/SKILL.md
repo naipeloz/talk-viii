@@ -44,8 +44,9 @@ en una tabla. Los sospechosos según el dominio:
 - Márgenes: ¿hace falta un colchón entre eventos para que cuenten como continuos?
 
 Cada una va a la tabla con su decisión tomada. Las que queden sin decidir se marcan
-**⚠️ pendiente** y se nombran en el ticket — nunca se resuelven por defecto en el
-código.
+**⚠️ pendiente** y se nombran en las **restricciones de alcance** del ticket que la usa
+—nunca entre sus criterios de aceptación, porque un pendiente no se verifica— y nunca
+se resuelven por defecto en el código.
 
 ## Los contratos, antes de partir
 
@@ -72,13 +73,18 @@ Y escribí en una línea la forma del POC: *entra un X, sale un Y*.
 
 ## Los tickets
 
-Partí en 3 a 5 paquetes. Cada uno con las cinco secciones (ver
-`formato-de-ticket`, la skill de repo). Marcá:
+Partí en 3 a 5 paquetes. Cada uno con las cinco secciones (ver `formato-de-ticket`, la
+skill de repo — que es además la que los guarda en `tickets/` o los publica en el
+tablero, una vez que pasan). Marcá:
 
 - **Cuál bloquea.** Si hay uno que los demás esperan, decilo. Normalmente es el
   contrato, y por eso se fija antes.
-- **Cuáles corren en paralelo de verdad.** Si no pueden, **decilo** en vez de fingir
-  que sí. Un tablero que promete paralelo y no lo es cuesta más que uno secuencial.
+- **Cuáles corren en paralelo de verdad.** Distinguí dos cosas que se confunden:
+  *bloquear el arranque* —nadie puede empezar hasta que esto cierre— y *consumir la
+  salida* —se escribe contra el contrato y se integra después—. Con el contrato fijado,
+  consumir no bloquea; sin él, sí. Si de verdad no pueden arrancar juntos, **decilo** en
+  vez de fingir que sí: un tablero que promete paralelo y no lo es cuesta más que uno
+  secuencial.
 - **El eval es un ticket.** Los 20 casos del KR1 no son "testing": son el ticket que
   decide si el resto sirve.
 
@@ -103,20 +109,28 @@ que los precede:
 type … = { … }
 ```
 
+## El eval
+<Los casos del KR1: dónde viven, quién los verificó a mano, y qué significa
+reproducirlos. Es un ticket, no "testing".>
+
 ## Restricciones de alcance
+- **Fecha de corte: <la del KR2>.** Lo que no entra antes, no entra.
 - Sin …
 
 Entra un <X>, sale un <Y>.
 
 ## Tickets
-| # | Ticket | Dueño | Bloquea |
-|---|---|---|---|
+| # | Ticket | Dueño | Bloquea el arranque de | Consume la salida de |
+|---|---|---|---|---|
 ~~~
 
 ## Criterios de aceptación de esta skill
 
+- Ningún spec sale sin la fecha de corte del KR2 ni sin la sección del eval. Las dos
+  vienen del OKR: si faltan, el spec no se puede cerrar ni evaluar.
 - Ningún ticket sale sin sección de restricciones de alcance.
 - Ningún criterio de aceptación queda escrito como opinión: pasa el mismo test de
   medible y falsificable que en `okr-de-poc`.
 - Si los paquetes no pueden correr en paralelo, lo decís.
-- Si una regla quedó sin decidir, aparece marcada ⚠️ en el ticket que la usa.
+- Si una regla quedó sin decidir, aparece marcada ⚠️ en las restricciones de alcance
+  del ticket que la usa, no entre sus criterios de aceptación.

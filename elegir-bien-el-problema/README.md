@@ -21,6 +21,9 @@ Cuatro skills. Tres pasos y un formato. Nada más — un repo grande contradice 
 | `poc-a-spec` | ¿Qué reglas nadie escribió todavía? | *esto no corre en paralelo* |
 | `formato-de-ticket` | ¿Este ticket se puede verificar? | *rechazado, falta X* |
 
+La cuarta es también la que **publica**: el ticket que pasa se guarda en `tickets/` o se
+crea como issue de GitHub. El que no pasa no llega al tablero — ese es todo el punto.
+
 **Las skills no responden por ti. Te interrogan.** Una que devuelve un resultado sin
 haber preguntado nada se convirtió en un generador de texto y perdió la función.
 
@@ -63,7 +66,7 @@ bien y no se pueden evaluar.
 ## El ejemplo
 
 [`ejemplos/bloques-de-foco/`](ejemplos/bloques-de-foco/) tiene un caso real pasado por
-los tres pasos, tal cual salió:
+los tres pasos — la salida de cada skill, con las notas de la charla intercaladas:
 
 1. [La duda](ejemplos/bloques-de-foco/1-duda.md) — *¿cuántos bloques de dos horas sin
    interrupciones quedan por semana, y qué se los rompe?*

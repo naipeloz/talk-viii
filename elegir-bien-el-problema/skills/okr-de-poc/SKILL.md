@@ -97,6 +97,12 @@ sistema tiene que reproducirlos exactamente (20/20).
 Cuando detectes que estás en este caso, decilo: el error más común en análisis no es
 concluir mal, es concluir bien sobre datos mal extraídos.
 
+Y cambiá la forma del OKR en vez de forzarla: KR2 pasa a ser el eval —*reproduce los 20
+casos exactamente (20/20) al `<fecha>`*— y **el umbral de decisión se muda al KR3**, que
+es donde vive el número que mata el proyecto. Si dejás el umbral en KR2 te queda un KR
+que mide dos cosas distintas en el mismo renglón: si el instrumento es fiel, y si el
+resultado importa.
+
 ## Qué devolvés
 
 ```markdown
@@ -112,6 +118,8 @@ KR3  <Nombre> decide con el número en la mano:
      <regla de decisión escrita antes de mirar>.
 
 ## Umbral, decidido antes de mirar
+<La regla del KR2 — o la del KR3, si el KR2 valida el instrumento.>
+
 | Resultado | Lectura |
 |---|---|
 | … | … |

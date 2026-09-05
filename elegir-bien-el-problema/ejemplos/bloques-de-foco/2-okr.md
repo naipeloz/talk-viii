@@ -26,6 +26,9 @@ Si alguna regla está mal, el número sale limpio y es mentira.
 
 > El error más común en análisis no es concluir mal. Es concluir bien sobre datos mal
 > extraídos. Por eso el eval de los 20 días es KR1 y KR2 a la vez.
+>
+> Y por eso el umbral de decisión no vive en el KR2 sino en el KR3: el KR2 mide si el
+> instrumento es fiel, el KR3 dice qué número cambia lo que hacemos.
 
 ## El umbral, decidido antes de mirar
 

@@ -21,10 +21,11 @@ También rechazado: es una queja. No se contesta con sí o no.
 
 | Pregunta del filtro | Respuesta |
 |---|---|
-| ¿Puedes escribirla como pregunta? | Sí, y la respuesta es un número entero |
+| ¿Se puede escribir como pregunta? | Sí, y la respuesta es un número entero |
 | ¿Alguien la respondería distinto? | **Sí.** Nadie lo midió, y la intuición del que agenda y la del que recibe son muy distintas |
 | ¿Cambia una decisión? | Sí: mover la daily, agrupar reuniones en dos días, declarar una tarde sin reuniones |
 | ¿Se responde con lo que existe? | Sí. El calendario está lleno de datos que nadie miró |
+| ¿Alguien juzga una salida en un minuto? | Sí. Julián imprime un día, tacha los eventos que cortan y dice si el conteo es correcto |
 | ¿Se responde en semanas? | En una tarde |
 
 ## Veredicto
