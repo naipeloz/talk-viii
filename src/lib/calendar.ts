@@ -1,11 +1,32 @@
 export type CalendarEvent = {
   id: string;
-  /** ISO date, `YYYY-MM-DD`. */
+  /** ISO date, `YYYY-MM-DD`, in the calendar's own time zone. */
   date: string;
+  /** `HH:MM`, or an empty string for all-day events. */
   time: string;
   title: string;
+  /** Tailwind background class used for the event dot. */
   color: string;
+  allDay?: boolean;
+  location?: string;
+  htmlLink?: string;
 };
+
+export function groupEventsByDate(events: CalendarEvent[]) {
+  const map = new Map<string, CalendarEvent[]>();
+  for (const event of events) {
+    const bucket = map.get(event.date);
+    if (bucket) bucket.push(event);
+    else map.set(event.date, [event]);
+  }
+  for (const bucket of map.values()) {
+    bucket.sort((a, b) => {
+      if (a.allDay !== b.allDay) return a.allDay ? -1 : 1;
+      return a.time.localeCompare(b.time);
+    });
+  }
+  return map;
+}
 
 export const WEEKDAYS = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
 

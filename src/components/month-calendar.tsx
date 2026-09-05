@@ -7,6 +7,8 @@ type Props = {
   today: string;
   selected: string;
   eventsByDate: Map<string, CalendarEvent[]>;
+  loading: boolean;
+  error: string | null;
   onSelect: (iso: string) => void;
   onMonthChange: (amount: number) => void;
   onToday: () => void;
@@ -17,6 +19,8 @@ export function MonthCalendar({
   today,
   selected,
   eventsByDate,
+  loading,
+  error,
   onSelect,
   onMonthChange,
   onToday,
@@ -27,6 +31,11 @@ export function MonthCalendar({
     <section className="flex h-full min-w-0 flex-col">
       <header className="flex shrink-0 items-center gap-3 border-b border-black/10 px-6 py-4 dark:border-white/10">
         <h1 className="text-xl font-semibold capitalize">{formatMonth(month)}</h1>
+        {loading && (
+          <span className="text-xs opacity-60" role="status">
+            Cargando…
+          </span>
+        )}
 
         <div className="ml-auto flex items-center gap-1">
           <button
@@ -54,6 +63,15 @@ export function MonthCalendar({
           </button>
         </div>
       </header>
+
+      {error && (
+        <p
+          role="alert"
+          className="shrink-0 border-b border-amber-500/30 bg-amber-500/10 px-6 py-2 text-sm"
+        >
+          {error}
+        </p>
+      )}
 
       <div className="grid shrink-0 grid-cols-7 border-b border-black/10 dark:border-white/10">
         {WEEKDAYS.map((weekday) => (
@@ -98,9 +116,10 @@ export function MonthCalendar({
                   <span
                     key={event.id}
                     className="flex items-center gap-1.5 truncate rounded px-1 py-0.5 text-xs"
-                    title={`${event.time} · ${event.title}`}
+                    title={event.allDay ? event.title : `${event.time} · ${event.title}`}
                   >
                     <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${event.color}`} />
+                    {!event.allDay && <span className="shrink-0 tabular-nums opacity-50">{event.time}</span>}
                     <span className="truncate opacity-80">{event.title}</span>
                   </span>
                 ))}
