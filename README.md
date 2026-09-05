@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# talk-viii
 
-## Getting Started
+Calendario a pantalla completa (Next.js 16 + Tailwind v4) que muestra los eventos de un
+calendario de Google, con un panel lateral colapsable para el detalle del día.
 
-First, run the development server:
+## Desarrollo
 
 ```bash
+npm install
+cp .env.example .env.local   # completá las credenciales (ver abajo)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Conectar el calendario de Google
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+La app lee los eventos con la **Google Calendar API v3** desde un route handler
+(`/api/events`), así las credenciales nunca llegan al browser. Hay dos rutas de
+autenticación; alcanza con configurar una.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### A) Calendario privado — service account (recomendado)
 
-## Learn More
+1. En [Google Cloud Console](https://console.cloud.google.com/) creá (o elegí) un proyecto
+   y habilitá la **Google Calendar API**.
+2. Creá una **service account** y generá una key JSON.
+3. En Google Calendar → *Configuración del calendario* → **Compartir con determinadas
+   personas** → agregá el `client_email` de la service account con permiso
+   **"Ver todos los detalles del evento"**.
+4. Configurá las variables:
 
-To learn more about Next.js, take a look at the following resources:
+   ```
+   GOOGLE_SERVICE_ACCOUNT_EMAIL=<client_email del JSON>
+   GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY=<private_key del JSON, con los \n literales>
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+No requiere que el calendario sea público ni que el visitante se loguee.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### B) Calendario público — API key
 
-## Deploy on Vercel
+1. Hacé el calendario público (*Configuración del calendario* → **Permisos de acceso** →
+   "Hacer disponible al público").
+2. Creá una **API key** en Google Cloud, restringida a la Calendar API.
+3. Configurá `GOOGLE_CALENDAR_API_KEY=<tu key>`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Más simple, pero expone el calendario a cualquiera que tenga el ID.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Variables
+
+| Variable | Requerida | Descripción |
+| --- | --- | --- |
+| `GOOGLE_CALENDAR_ID` | No | ID del calendario. Por defecto usa el del proyecto. |
+| `GOOGLE_SERVICE_ACCOUNT_EMAIL` | Ruta A | `client_email` del JSON de la service account. |
+| `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` | Ruta A | `private_key` del JSON. |
+| `GOOGLE_CALENDAR_API_KEY` | Ruta B | API key restringida a Calendar API. |
+
+En Vercel, cargalas en *Project Settings → Environment Variables* para
+Production, Preview y Development.
+
+## Cómo funciona
+
+- `src/lib/google-calendar.ts` — trae los eventos del rango visible
+  (`singleEvents=true`, así Google ya expande las recurrencias), los normaliza a la zona
+  horaria del calendario y parte los eventos multi-día en una entrada por día.
+- `src/lib/google-auth.ts` — firma el JWT de la service account con `node:crypto` y
+  cachea el access token. Sin dependencias de Google.
+- `src/app/api/events/route.ts` — `GET /api/events?month=YYYY-MM`. Respuestas cacheadas
+  5 minutos.
+- `src/components/calendar-workspace.tsx` — estado del mes/día y fetch por mes.
+
+## Deploy
+
+Conectado a Vercel: push a `main` → producción, cualquier otra rama → preview.
