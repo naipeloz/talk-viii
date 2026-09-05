@@ -21,16 +21,16 @@ Entra: `Evento`. Sale: `"corta" | "borra_el_dia" | "se_ignora"`.
 - [ ] "Focus time" propio → `se_ignora` (es el resultado que se busca, no la interrupción)
 - [ ] Organizador e invitado dan el mismo resultado con el mismo evento
 - [ ] Un evento fuera de 9:00–18:00 no afecta el día
-- [ ] ⚠️ Almuerzo: **pendiente de decidir**. No implementar un default en silencio —
-      si llega el momento sin decisión, el ticket se frena y se pregunta
 
 ## Restricciones de alcance
 
+- ⚠️ **Almuerzo: pendiente de decidir.** No implementar un default en silencio — si
+  llega el momento sin decisión, el ticket se frena y se pregunta
 - Sin configuración: el horario laboral y el colchón son constantes declaradas
 - Sin heurísticas sobre el título — el título no llega hasta acá
 - Sin excepciones por persona
 
 ## Cómo se verifica
 
-Un test por fila de la tabla de reglas del spec. Siete reglas, siete tests, más el
-caso pendiente marcado como `todo`.
+Un test por fila decidida de la tabla de reglas del spec: seis reglas, seis tests. El
+almuerzo queda como `todo` hasta que alguien lo decida — no como un test que pasa.

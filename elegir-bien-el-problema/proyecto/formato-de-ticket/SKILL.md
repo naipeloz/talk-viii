@@ -1,6 +1,6 @@
 ---
 name: formato-de-ticket
-description: Formato obligatorio de los tickets de este repo — cinco secciones, criterio de éxito arriba, criterios de aceptación verificables y restricciones de alcance explícitas. Usar al escribir, revisar o completar un ticket, una issue o una descripción de tarea en este proyecto. Rechaza tickets incompletos en vez de completarlos por su cuenta.
+description: Formato obligatorio de los tickets de este repo — cinco secciones, criterio de éxito arriba, criterios de aceptación verificables y restricciones de alcance explícitas. Y publica el que pasa: lo guarda como `tickets/NN-slug.md`, lo crea como issue de GitHub, o las dos cosas. Usar al escribir, revisar, publicar, guardar o completar un ticket, una issue o una descripción de tarea en este proyecto. Rechaza tickets incompletos en vez de completarlos por su cuenta, y no publica lo que no pasa.
 ---
 
 # Formato de ticket
@@ -36,6 +36,18 @@ fija otro ticket, se referencia — no se redefine.>
 <El comando, el eval, o el procedimiento manual. Quién lo mira.>
 ```
 
+## Dos cosas que se malinterpretan
+
+**Bloquea a:** son los tickets que **no pueden empezar** hasta que este cierre — no los
+que consumen su salida. Si el contrato ya está fijado, consumir no es bloquear: se
+escribe contra el tipo y se integra después. La dependencia de datos se declara en
+**Contrato**, no acá.
+
+**Reglas sin decidir (⚠️):** no son criterios de aceptación — un pendiente no se
+verifica, así que dos personas nunca coinciden en si se cumplió. Van en **Restricciones
+de alcance**, marcadas ⚠️, con la decisión de no resolverlas por defecto escrita: *si
+llega el momento sin decisión, el ticket se frena y se pregunta.*
+
 ## Qué rechazar
 
 Cuando revises un ticket, rechazalo —y decí exactamente qué falta— si:
@@ -59,6 +71,55 @@ del trabajo de otra persona.
 
 Excepción única: si el autor te pide explícitamente una propuesta, escribila marcada
 como **propuesta** y pedí confirmación antes de darla por buena.
+
+## Dónde va el ticket cuando pasa
+
+Un ticket que pasa las cinco secciones se guarda, se publica, o las dos cosas. **Uno que
+no pasa, no.** Publicar un ticket incompleto es exactamente lo que esta skill existe
+para frenar: en el tablero ya no lo lee su autor, lo lee alguien que va a implementarlo.
+Primero el veredicto, después el destino.
+
+Preguntá cuál de los dos querés, o los dos. Si no te dicen, guardá el archivo y no
+publiques.
+
+### A · Archivo en el repo
+
+`tickets/<NN>-<slug>.md` — `NN` es el siguiente número libre, el slug sale del título.
+
+- Creá `tickets/` si no existe.
+- **Nunca sobrescribas.** Si el archivo ya existe, decilo y pedí un número nuevo o
+  confirmación explícita para reemplazarlo.
+- El archivo es el ticket tal cual, sin envoltorio: arranca en el `#` del título.
+
+### B · Tablero — GitHub Issues
+
+```bash
+TITULO=$(sed -n '1s/^# //p' tickets/<NN>-<slug>.md)
+gh issue create --title "$TITULO" --body "$(sed '1d' tickets/<NN>-<slug>.md)"
+```
+
+El `#` del título va al campo título de la issue, no al cuerpo — por eso el `sed '1d'`.
+Guardá el archivo primero (opción A) aunque el destino sea el tablero: es lo que hace
+reproducible la publicación.
+
+- **Confirmá antes de crear.** Mostrá título, cuerpo y repo destino, y esperá el sí. Una
+  issue la ve el equipo entero y cerrarla no des-notifica a nadie.
+- **No dupliques.** `gh issue list --search "<título> in:title"` antes de crear.
+- **Dueño → `--assignee`** solo si sabés el handle de GitHub de esa persona. Si no lo
+  sabés, no lo adivines: queda en el cuerpo y lo decís al devolver.
+- **Labels:** solo las que ya existen (`gh label list`). No crees labels nuevas.
+- **Proyecto:** `--project "<nombre>"` solo si te nombran uno. No elijas tablero por tu
+  cuenta.
+- **Bloquea a:** publicá en el orden del spec y reemplazá los nombres por `#N` cuando la
+  issue referida ya exista. Si todavía no existe, dejá el nombre — no inventes números.
+- Si `gh` no está instalado o no hay sesión, decilo, dejá el archivo guardado y frená
+  ahí. No busques otra vía.
+
+Los `- [ ]` de los criterios de aceptación llegan a GitHub como checklist tildable. Es
+otra razón por la que esa sección tiene que ser verificable: en el tablero se tildan de
+a uno, y "funciona bien" no se tilda.
+
+Al terminar devolvé la ruta del archivo y la URL de la issue. Nada más.
 
 ## Ejemplo bueno / ejemplo malo
 

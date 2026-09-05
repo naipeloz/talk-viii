@@ -26,7 +26,8 @@ Sale: `Dia`, según el tipo fijado en [0-spec.md](0-spec.md).
 
 - Sin agregación semanal (eso es el ticket 4)
 - Sin zona horaria configurable: la del calendario
-- Sin bloques que crucen el mediodía si la regla del almuerzo termina cortando ⚠️
+- ⚠️ Sin bloques que crucen el mediodía si la regla del almuerzo termina cortando
+  (pendiente en el ticket 2)
 
 ## Cómo se verifica
 

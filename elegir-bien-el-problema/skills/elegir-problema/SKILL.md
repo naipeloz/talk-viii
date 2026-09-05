@@ -1,6 +1,6 @@
 ---
 name: elegir-problema
-description: Convierte una idea suelta, una queja o un "quiero automatizar X" en una duda escrita como pregunta, y dictamina si vale la pena un POC. Usar cuando alguien describe un problema, una idea de producto, algo que quiere automatizar o medir, o pide ayuda para "empezar" algo. Interroga antes de responder; puede dictaminar que todavía no.
+description: Convierte una idea suelta, una queja o un "quiero automatizar X" en una duda escrita como pregunta, y dictamina si vale la pena un POC. Usar cuando alguien describe un problema, una idea de producto, algo que quiere automatizar o medir, o pide ayuda para "empezar" algo. Interroga antes de responder; puede dictaminar que todavía no, o que el problema es demasiado grande y hay que partirlo.
 ---
 
 # Elegir el problema
@@ -75,10 +75,11 @@ Cuando (y solo cuando) terminaste el interrogatorio:
 ## Contra el filtro
 | Pregunta del filtro | Respuesta |
 |---|---|
-| ¿Puedes escribirla como pregunta? | … |
+| ¿Se puede escribir como pregunta? | … |
 | ¿Alguien la respondería distinto? | … |
 | ¿Cambia una decisión? | … |
 | ¿Se responde con lo que existe? | … |
+| ¿Alguien juzga una salida en un minuto? | … |
 | ¿Se responde en semanas? | … |
 
 ## Veredicto
@@ -86,6 +87,9 @@ Cuando (y solo cuando) terminaste el interrogatorio:
 
 <motivo en dos o tres líneas>
 ```
+
+La tabla lleva las seis filas siempre, también las que fallan. Una fila que no aparece
+es un criterio que nadie auditó.
 
 Los tres veredictos posibles:
 
