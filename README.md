@@ -51,10 +51,59 @@ Más simple, pero expone el calendario a cualquiera que tenga el ID.
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL` | Ruta A | `client_email` del JSON de la service account. |
 | `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` | Ruta A | `private_key` del JSON. |
 | `GOOGLE_CALENDAR_API_KEY` | Ruta B | API key restringida a Calendar API. |
+| `CLAUDE_CONFIG_DIR` | Camino A | Config dir del login de Claude Code que paga (ver *El modelo*). |
+| `ANTHROPIC_API_KEY` | Camino B | Key de la Anthropic API. |
 
 En Vercel, cargalas en *Project Settings → Environment Variables* para
 Production, Preview y Development.
 
+## El modelo
+
+Hay **dos caminos** para llamar al modelo, y sólo hace falta uno. Los dos corren en el
+servidor: la credencial nunca llega al browser.
+
+| | A · Suscripción | B · API key |
+|---|---|---|
+| Paquete | `@anthropic-ai/claude-agent-sdk` | `@anthropic-ai/sdk` |
+| Módulo | `src/lib/claude-agent.ts` | `src/lib/anthropic.ts` |
+| Paga con | tu plan de claude.ai (Pro/Max) | créditos de la API |
+| Corre en | **sólo local** | cualquier lado, Vercel incluido |
+| Verificar | `npm run check:agent` | `npm run check:anthropic` |
+
+### A · Con la suscripción de claude.ai
+
+El Agent SDK delega en el binario de Claude Code, así que usa el login que ya tenés en
+la máquina en vez de créditos. Necesita ese binario presente — por eso no funciona en
+Vercel.
+
+Elegís **cuál** login con `CLAUDE_CONFIG_DIR` en `.env.local`. Si tenés varias cuentas
+(por ejemplo un `~/.claude` de trabajo y un `~/.claude-personal` con el plan personal),
+apuntá a la que quieras que pague:
+
+```
+CLAUDE_CONFIG_DIR=/Users/vos/.claude-personal
+```
+
+`askForJson()` en `src/lib/claude-agent.ts` es la única puerta: recibe un prompt y un
+JSON Schema, y devuelve la respuesta ya parseada. Va sin herramientas y con un solo
+turno — es una pregunta, no un agente. Y **borra `ANTHROPIC_API_KEY` del entorno del
+subproceso**: si está seteada, Claude Code la prefiere y terminás pagando créditos sin
+enterarte.
+
+### B · Con una API key
+
+`src/lib/anthropic.ts` expone el cliente detrás de `server-only` —importarlo desde un
+componente cliente **rompe el build**, que es la garantía de que la key no entra al
+bundle—, más `ANTHROPIC_MODEL` y `describeAnthropicError`, que traduce los errores del
+SDK de más específico a más general.
+
+Para pedirle JSON al modelo, `client.messages.parse()` con `jsonSchemaOutputFormat`, el
+helper que ya trae el SDK: no hace falta sumar `zod`. Ojo que `parsed_output` es `null`
+si el parseo falla.
+
+Los dos comandos de chequeo hacen una llamada chica y confirman de punta a punta que la
+credencial sirve, que el modelo responde y que los structured outputs validan. Corrélos
+**antes** de necesitarlos, no en el medio de una demo.
 ## Cómo funciona
 
 - `src/lib/google-calendar.ts` — trae los eventos del rango visible

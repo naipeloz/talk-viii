@@ -6,9 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:anthropic": "node --env-file-if-exists=.env.local scripts/smoke-anthropic.mts",
+    "check:agent": "node --env-file-if-exists=.env.local scripts/smoke-claude-agent.mts"
   },
   "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.3.261",
+    "@anthropic-ai/sdk": "^0.124.0",
     "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
