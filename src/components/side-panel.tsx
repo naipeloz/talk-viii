@@ -1,6 +1,7 @@
 "use client";
 
 import { CalendarEvent, formatFullDate } from "@/lib/calendar";
+import { ClaudeBox } from "./claude-box";
 
 type Props = {
   collapsed: boolean;
@@ -39,6 +40,7 @@ export function SidePanel({ collapsed, onToggle, selected, events, loading, erro
           </span>
         </div>
       ) : (
+        <>
         <div className="min-h-0 flex-1 overflow-y-auto p-4">
           <p className="text-lg font-medium capitalize">
             {selected ? formatFullDate(selected) : "—"}
@@ -103,6 +105,9 @@ export function SidePanel({ collapsed, onToggle, selected, events, loading, erro
             </p>
           )}
         </div>
+
+        <ClaudeBox />
+        </>
       )}
     </aside>
   );

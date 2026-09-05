@@ -101,6 +101,16 @@ Para pedirle JSON al modelo, `client.messages.parse()` con `jsonSchemaOutputForm
 helper que ya trae el SDK: no hace falta sumar `zod`. Ojo que `parsed_output` es `null`
 si el parseo falla.
 
+### La box del panel
+
+Debajo del detalle del día hay una box **Claude** con un botón *Probar conexión*. Pega
+contra `GET /api/claude`, que le pide al modelo una frase **generada en el momento** —no
+un estado hardcodeado— y muestra modelo, vía, cuenta y latencia. Sirve para ver de un
+vistazo, en vivo, que la app le habla al modelo con tu suscripción.
+
+La respuesta tarda unos **5–6 segundos**: casi todo es el arranque del subproceso de
+Claude Code. El botón queda en *Preguntándole a Claude…* mientras tanto.
+
 Los dos comandos de chequeo hacen una llamada chica y confirman de punta a punta que la
 credencial sirve, que el modelo responde y que los structured outputs validan. Corrélos
 **antes** de necesitarlos, no en el medio de una demo.
