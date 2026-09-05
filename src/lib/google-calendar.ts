@@ -117,7 +117,8 @@ function addDays(iso: string, amount: number) {
 const MAX_SPAN_DAYS = 60;
 
 function expand(event: GoogleEvent, calendarTimeZone: string): CalendarEvent[] {
-  const title = event.summary?.trim() || "(sin título)";
+  // A calendar shared as "free/busy only" returns events without a summary.
+  const title = event.summary?.trim() || "Ocupado";
   const color = (event.colorId && EVENT_COLORS[event.colorId]) || hashColor(event.id);
   const shared = {
     title,
